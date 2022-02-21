@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
-  ScrollView,
   Image,
   Text,
   TouchableOpacity,
@@ -11,7 +10,7 @@ import { Box } from 'native-base';
 
 export default function TrendingPlacesCard({ places }) {
   const [placeDetails, setPlaceDetails] = useState('');
-  
+
   useEffect(() => {
     fetch(`https://hacktiv8-instafood.herokuapp.com/places/${places.place_id}`)
       .then(response => {

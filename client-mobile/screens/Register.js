@@ -10,10 +10,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Input, Icon, Stack, Text, Button } from 'native-base';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { userRegister } from '../store/actionCreators';
+
 const windowHeight = Dimensions.get('window').height;
 
 export default function Register() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [show, setShow] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -29,6 +34,16 @@ export default function Register() {
   }
   const handleInputPasswordChange = (passwordInput) => {
     setPassword(passwordInput);
+  }
+  const handleRegister = () => {
+    dispatch(userRegister({
+      email,
+      password,
+      username
+    }))
+      .then(() => {
+        navigation.goBack()
+      })
   }
 
   return (
@@ -109,6 +124,7 @@ export default function Register() {
         <Text>{username}</Text>
         <Text>{password}</Text>
         <Button
+          onPress={handleRegister}
           colorScheme="red"
           w={{ base: '80%', md: '20%' }}
           h={12}

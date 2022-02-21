@@ -118,7 +118,7 @@ export default function Login() {
         <Text style={{ fontSize: 15 }}>Don\'t have an account? </Text>
         <TouchableOpacity
           onPress={() => {
-            navigation.push('Register');
+            navigation.navigate('Register');
           }}
         >
           <Text style={{ fontWeight: 'bold' }}>Sign Up.</Text>

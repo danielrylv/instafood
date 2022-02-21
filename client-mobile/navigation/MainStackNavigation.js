@@ -4,7 +4,7 @@ import BottomTabNavigation from './BottomTabNavigation';
 import CreatePostScreen from '../screens/CreatePostScreen';
 import SearchScreen from '../screens/SearchScreen';
 import Register from '../screens/Register';
-import DrawerNavigator from './DrawerNavigator';
+import Profile from '../screens/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +16,11 @@ export default function MainStackNavigation() {
         component={BottomTabNavigation}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="CreatePostScreen" component={CreatePostScreen} options={{ headerShown: false }} />
+      <Stack.Screen
+        name="CreatePostScreen"
+        component={CreatePostScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="SearchScreen"
         component={SearchScreen}
@@ -25,6 +29,11 @@ export default function MainStackNavigation() {
       <Stack.Screen
         name="Register"
         component={Register}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -10,13 +10,43 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Input, Icon, Stack, Text, Button } from 'native-base';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { userRegister } from '../store/actionCreators';
+
 const windowHeight = Dimensions.get('window').height;
 
 export default function Register() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const [show, setShow] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState('');
 
   const handleClick = () => setShow(!show);
+
+  const handleInputEmailChange = emailInput => {
+    setEmail(emailInput);
+  };
+  const handleInputUsernameChange = usernameInput => {
+    setUsername(usernameInput);
+  };
+  const handleInputPasswordChange = passwordInput => {
+    setPassword(passwordInput);
+  };
+  // register
+  const handleRegister = () => {
+    dispatch(
+      userRegister({
+        email,
+        password,
+        username,
+      })
+    ).then(() => {
+      navigation.goBack();
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,7 +55,8 @@ export default function Register() {
           onPress={() => {
             navigation.goBack();
           }}
-          style={{ paddingVertical: 10, paddingHorizontal: 13 }}>
+          style={{ paddingVertical: 10, paddingHorizontal: 13 }}
+        >
           <Ionicons name="arrow-back" size={34} color="#929292" />
         </TouchableOpacity>
       </View>
@@ -41,6 +72,8 @@ export default function Register() {
       />
       <Stack space={6} w="100%" alignItems="center">
         <Input
+          value={email}
+          onChangeText={handleInputEmailChange}
           borderWidth={2}
           borderColor="muted.300"
           borderRadius="xl"
@@ -56,6 +89,8 @@ export default function Register() {
           placeholder="email address"
         />
         <Input
+          value={username}
+          onChangeText={handleInputUsernameChange}
           borderWidth={2}
           borderColor="muted.300"
           borderRadius="xl"
@@ -71,6 +106,8 @@ export default function Register() {
           placeholder="username"
         />
         <Input
+          value={password}
+          onChangeText={handleInputPasswordChange}
           borderWidth={2}
           borderColor="muted.300"
           borderRadius="xl"
@@ -86,7 +123,11 @@ export default function Register() {
           }
           placeholder="Password"
         />
+        <Text>{email}</Text>
+        <Text>{username}</Text>
+        <Text>{password}</Text>
         <Button
+          onPress={handleRegister}
           colorScheme="red"
           w={{ base: '80%', md: '20%' }}
           h={12}

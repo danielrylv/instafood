@@ -1,5 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, Text, TouchableOpacity, Image, Dimensions, } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Input, Icon, Stack, Center, Button } from 'native-base';
@@ -25,15 +33,25 @@ export default function PlaceDetail() {
         <View>
           <ScrollView>
             <View style={styles.placeContainer}>
-              <View style={{ backgroundColor: 'white', paddingHorizontal: 16, paddingBottom: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  paddingHorizontal: 16,
+                  paddingBottom: 10,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}
+              >
                 <Text style={styles.placeDetailName}>Kitchen & Coffee</Text>
                 <Image
-                  source={{ uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png' }}
+                  source={{
+                    uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
+                  }}
                   style={{
                     width: 33,
                     height: 33,
                     resizeMode: 'contain',
-                    marginVertical: 6
+                    marginVertical: 6,
                   }}
                 />
               </View>
@@ -45,12 +63,28 @@ export default function PlaceDetail() {
                   index={0}
                   showPagination
                   paginationStyle={{ height: 13 }}
-                  paginationStyleItem={{ width: 10, height: 10, borderRadius: 10 / 2, marginHorizontal: 6 }}
+                  paginationStyleItem={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 10 / 2,
+                    marginHorizontal: 6,
+                  }}
                   data={images}
                   renderItem={({ item }) => (
-                    <View style={{ width: windowWidth, justifyContent: 'center', alignItems: 'center', }}>
+                    <View
+                      style={{
+                        width: windowWidth,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
                       <Image
-                        style={{ width: windowWidth * 0.93, height: 320, resizeMode: 'cover', borderRadius: 13 }}
+                        style={{
+                          width: windowWidth * 0.93,
+                          height: 320,
+                          resizeMode: 'cover',
+                          borderRadius: 13,
+                        }}
                         source={{
                           uri: item,
                         }}
@@ -59,24 +93,45 @@ export default function PlaceDetail() {
                   )}
                 />
               </View>
-              <View style={{ backgroundColor: 'white', padding: 5, flexDirection: 'row' }}>
-                <Ionicons name="location-sharp" size={34} color="#929292" style={{ paddingHorizontal: 10 }} />
-                <Text style={{ fontSize: 17, paddingTop: 5, }}>16, Jl. Denpasar Raya No.109, RT.16/RW.4...</Text>
+              <View
+                style={{
+                  backgroundColor: 'white',
+                  padding: 5,
+                  paddingTop: 12,
+                  flexDirection: 'row',
+                }}
+              >
+                <Ionicons
+                  name="location-sharp"
+                  size={34}
+                  color="#929292"
+                  style={{ paddingHorizontal: 10 }}
+                />
+                <Text style={{ fontSize: 17, paddingTop: 5 }}>
+                  16, Jl. Denpasar Raya No.109, RT.16/RW.4...
+                </Text>
               </View>
             </View>
           </ScrollView>
         </View>
-        <View style={{ paddingHorizontal: 20, paddingBottom: 20, backgroundColor: 'white' }}>
-          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Related Posts</Text>
+        <View
+          style={{
+            paddingHorizontal: 20,
+            paddingBottom: 20,
+            backgroundColor: 'white',
+          }}
+        >
+          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+            Related Posts
+          </Text>
         </View>
-
+        {/* 
         {
           posts.map((post) => (
             <TrendingPost2 post={post} key={post.id} />
           ))
-        }
+        } */}
       </ScrollView>
-
     </SafeAreaView>
   );
 }
@@ -100,7 +155,7 @@ const styles = StyleSheet.create({
   placeDetailName: {
     fontSize: 35,
     fontWeight: 'normal',
-    paddingLeft: 1
+    paddingLeft: 1,
   },
   containerSwiper: { flex: 1, backgroundColor: 'white', margin: 18 },
 });
@@ -111,7 +166,8 @@ const posts = [
     imageUrl: [
       'https://images.pexels.com/photos/3779791/pexels-photo-3779791.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
       'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80',
-      'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80'],
+      'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80',
+    ],
     user: {
       name: 'Bambang',
       profilePicture:

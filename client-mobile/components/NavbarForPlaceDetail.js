@@ -12,7 +12,8 @@ export default function NavbarForPlaceDetail() {
           onPress={() => {
             navigation.goBack();
           }}
-          style={{ paddingVertical: 10, paddingHorizontal: 13 }}>
+          style={{ paddingVertical: 10, paddingHorizontal: 13 }}
+        >
           <Ionicons name="arrow-back" size={34} color="#929292" />
         </TouchableOpacity>
       </View>
@@ -26,7 +27,7 @@ export default function NavbarForPlaceDetail() {
           />
         </TouchableOpacity> */}
         <TouchableOpacity
-          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+        // onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
         >
           <Entypo
             name="menu"

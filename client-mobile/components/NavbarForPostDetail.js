@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { Entypo, Ionicons } from '@expo/vector-icons';
-import { useNavigation, DrawerActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function NavbarForComment() {
+export default function NavbarForPostDetail() {
   const navigation = useNavigation();
   return (
     <View style={styles.nav}>
@@ -24,29 +24,10 @@ export default function NavbarForComment() {
             paddingHorizontal: 5,
           }}
         >
-          Comments
+          Post Details
         </Text>
       </View>
-      <View style={{ flexDirection: 'row' }}>
-        {/* <TouchableOpacity>
-          <Entypo
-            name="heart-outlined"
-            size={31}
-            color="#929292"
-            style={{ paddingVertical: 13, paddingHorizontal: 13 }}
-          />
-        </TouchableOpacity> */}
-        <TouchableOpacity
-        // onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-        >
-          <Entypo
-            name="menu"
-            size={32}
-            color="#929292"
-            style={{ paddingVertical: 12, paddingRight: 13 }}
-          />
-        </TouchableOpacity>
-      </View>
+      <View style={{ flexDirection: 'row' }}></View>
     </View>
   );
 }

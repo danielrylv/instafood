@@ -7,15 +7,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function TrendingTags() {
+export default function TrendingTags({ tags }) {
   return (
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingEnd: 10}}>
-      <TouchableOpacity style={styles.tagsContainer}>
-        <View style={styles.tagsBox}>
-          <Text style={styles.text}>#enak</Text>
-        </View>
-      </TouchableOpacity>
-    </ScrollView>
+    <TouchableOpacity style={styles.tagsContainer}>
+      <View style={styles.tagsBox}>
+        <Text style={styles.text}>#{tags.tag}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 

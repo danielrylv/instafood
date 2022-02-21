@@ -9,18 +9,18 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import NavbarForProfile from '../components/NavbarForProfile';
+import Navbar from '../components/Navbar';
 import UserPost from '../components/UserPost';
 import PostButton from '../components/PostButton';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Profile() {
+export default function OtherUserProfile() {
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <NavbarForProfile />
+        <Navbar />
       </View>
       <View>
         <ScrollView>
@@ -30,32 +30,32 @@ export default function Profile() {
                 onPress={() => {
                   navigation.goBack();
                 }}
-                style={{ width: '39%', paddingHorizontal: 12 }}
+                style={{ width: '43%', paddingHorizontal: 12 }}
               >
                 <Ionicons name="arrow-back" size={34} color="#929292" />
               </TouchableOpacity>
-              <Text style={styles.myProfileText}>My Profile</Text>
+              <Text style={styles.myProfileText}>Profile</Text>
             </View>
             <View style={{ alignItems: 'center', marginVertical: 10 }}>
               <Image
                 style={styles.profilePic}
                 source={{
-                  uri: 'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__340.png',
+                  uri: 'https://cdn-icons-png.flaticon.com/512/236/236832.png',
                 }}
               />
-              <Text style={styles.profileName}>John Doe</Text>
+              <Text style={styles.profileName}>Dummy</Text>
               <Text style={{ color: 'gray' }}>dummy@email.com</Text>
             </View>
             <View style={styles.post}>
               <View style={{ width: '35%' }}>
                 <Text style={{ alignSelf: 'center', fontSize: 16 }}>Posts</Text>
-                <Text style={styles.postsCount}>50</Text>
+                <Text style={styles.postsCount}>100</Text>
               </View>
               <View style={{ width: '35%' }}>
                 <Text style={{ alignSelf: 'center', fontSize: 16 }}>
                   Liked Posts
                 </Text>
-                <Text style={styles.likesCount}>1500</Text>
+                <Text style={styles.likesCount}>100</Text>
               </View>
             </View>
           </View>

@@ -5,11 +5,15 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Text,
 } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { userLogout } from '../store/actionCreators';
 
-export default function Navbar() {
+export default function NavbarForProfile() {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   return (
     <View style={styles.nav}>
@@ -25,23 +29,21 @@ export default function Navbar() {
         />
       </View>
       <View style={{ flexDirection: 'row' }}>
-        {/* <TouchableOpacity>
-          <Entypo
-            name="heart-outlined"
-            size={31}
-            color="#929292"
-            style={{ paddingVertical: 13, paddingHorizontal: 13 }}
-          />
-        </TouchableOpacity> */}
         <TouchableOpacity
-        // onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+          style={{ flexDirection: 'row' }}
+          onPress={() => dispatch(userLogout())}
+          // onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
         >
-          <Entypo
-            name="menu"
-            size={32}
-            color="#929292"
-            style={{ paddingVertical: 12, paddingRight: 13 }}
-          />
+          <Text
+            style={{
+              paddingTop: 19,
+              paddingRight: 13,
+              fontSize: 16,
+              color: 'red',
+            }}
+          >
+            Logout
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

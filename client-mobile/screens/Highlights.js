@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
   ScrollView,
   Text,
   TouchableOpacity,
+  FlatList,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Navbar from '../components/Navbar';
@@ -14,6 +16,61 @@ import PostButton from '../components/PostButton';
 import TrendingPost2 from '../components/TrendingPost2';
 
 export default function Highlights() {
+  const [trendPlaces, setTrendingPlaces] = useState([]);
+  const [trendingTags, setTrendingTags] = useState([]);
+  const [trendingPosts, setTrendingPosts] = useState([]);
+
+  useEffect(() => {
+    fetch('https://hacktiv8-instafood.herokuapp.com/trending/places')
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject('something went wrong!');
+        }
+      })
+      .then(response => {
+        setTrendingPlaces(response);
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('https://hacktiv8-instafood.herokuapp.com/trending/tags')
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject('something went wrong!');
+        }
+      })
+      .then(response => {
+        setTrendingTags(response);
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch('https://hacktiv8-instafood.herokuapp.com/trending/posts')
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return Promise.reject('something went wrong!');
+        }
+      })
+      .then(response => {
+        setTrendingPosts(response);
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -26,14 +83,39 @@ export default function Highlights() {
               Trending Places
             </Text>
           </View>
-          <TouchableOpacity style={{ marginRight: 5, marginTop: 5 }}>
+          {/* <TouchableOpacity style={{ marginRight: 5, marginTop: 5 }}>
             <Text style={{ color: '#FF8F00', fontSize: 18 }}>see all</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View
           style={{ backgroundColor: 'white', height: 260, paddingVertical: 10 }}
         >
-          <TrendingPlacesCard />
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingEnd: 13 }}
+          >
+            {trendPlaces.length > 0 ? (
+              trendPlaces.map((places, index) => (
+                <TrendingPlacesCard places={places} key={index} />
+              ))
+            ) : (
+              <Image
+                style={{
+                  height: 60,
+                  width: 60,
+                  marginLeft: 230,
+                  resizeMode: 'cover',
+                  borderRadius: 10,
+                  alignSelf: 'center',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                }}
+                source={require('../assets/loading.gif')}
+              />
+            )}
+          </ScrollView>
         </View>
         <View style={styles.trendingTags}>
           <View>
@@ -41,12 +123,22 @@ export default function Highlights() {
               Trending Tags
             </Text>
           </View>
-          <TouchableOpacity style={{ marginRight: 5, marginTop: 5 }}>
+          {/* <TouchableOpacity style={{ marginRight: 5, marginTop: 5 }}>
             <Text style={{ color: '#FF8F00', fontSize: 18 }}>see all</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
-        <View style={{ backgroundColor: 'white', height: 65 }}>
-          <TrendingTags />
+        <View style={{ backgroundColor: 'white', height: 65, marginBottom: 7 }}>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingEnd: 10 }}
+          >
+            {trendingTags.length > 0
+              ? trendingTags.map((tags, index) => (
+                <TrendingTags tags={tags} key={index} />
+              ))
+              : null}
+          </ScrollView>
         </View>
         <View style={styles.trendingPosts}>
           <View>
@@ -54,15 +146,43 @@ export default function Highlights() {
               Trending Posts
             </Text>
           </View>
-          <TouchableOpacity style={{ marginRight: 5, marginTop: 5 }}>
+          {/* <TouchableOpacity style={{ marginRight: 5, marginTop: 5 }}>
             <Text style={{ color: '#FF8F00', fontSize: 18 }}>see all</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         <View style={styles.trendingPostContainer}>
-          {posts.map(post => (
-            <TrendingPost2 post={post} key={post.id} />
-          ))}
+          {/* <FlatList
+            data={trendingPosts}
+            renderItem={({ item }) => <TrendingPost2 post={item} key={item.id} />}
+            keyExtractor={item => item.id}
+          /> */}
+          <ScrollView>
+            {trendingPosts.length > 0 ? (
+              trendingPosts.map((post, index) => (
+                <TrendingPost2 post={post} key={index} />
+              ))
+            ) : (
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  alignContent: 'center',
+                  height: 360,
+                }}
+              >
+                <Image
+                  style={{
+                    height: 60,
+                    width: 60,
+                    resizeMode: 'cover',
+                    borderRadius: 10,
+                  }}
+                  source={require('../assets/loading.gif')}
+                />
+              </View>
+            )}
+          </ScrollView>
         </View>
       </ScrollView>
       <PostButton />
@@ -109,16 +229,17 @@ const styles = StyleSheet.create({
 const posts = [
   {
     id: 1,
-    imageUrl:[
+    imageUrl: [
       'https://images.pexels.com/photos/3779791/pexels-photo-3779791.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
       'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80',
-      'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80'],
+      'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80',
+    ],
     user: {
       name: 'Bambang',
       profilePicture:
         'https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659651__340.png',
     },
-    likes: 781019389,
+    likes: 500,
     place: 'Pizza Hut',
     createdAt: 'February 16, 2022',
     caption: 'Enak bangett!',
@@ -143,7 +264,7 @@ const posts = [
   },
   {
     id: 2,
-    imageUrl:[
+    imageUrl: [
       'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80',
       'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80',
       'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80',
